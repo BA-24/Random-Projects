@@ -1,0 +1,4 @@
+Key.f1 you pressed F1!
+Key.f2 you pressed F2!
+Key.ctrl you pressed ctrl!
+'a' you pressed the first letter of the english lexicon!
