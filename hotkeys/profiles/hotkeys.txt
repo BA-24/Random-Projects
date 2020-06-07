@@ -1,0 +1,14 @@
+Key.insert nice briding
+key.end /play bedwars_eight_two
+Key.down /play bedwars_four_three
+Key.page_down /play bedwars_four_four
+Key.left /play bedwars_two_four
+<12> /limbo
+Key.right /kickoffline
+Key.home /tipall
+Key.up please dont flatbridge
+Key.page_up bruh
+Key.f7 thanks
+Key.f8 nice
+Key.f9 gg
+Key.f10 epic
