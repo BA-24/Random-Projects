@@ -43,7 +43,7 @@ if file != None:
     keys = []
     for r in f:    
         if r != '\n':
-            keys = keys + [r.split()[0]]
+            keys = keys + [r.split()[0]].lower()
     f.close()
 
     #gets messages
@@ -64,8 +64,9 @@ if file != None:
         global check
         if check == True:
             a = 0
+            key = str(key).lower()
             for x in keys:
-                if x == str(key):
+                if x == key:
                     write(msg[a])
                 a = a + 1
 
