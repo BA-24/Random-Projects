@@ -1,6 +1,7 @@
 print('starting application...')
 
 from pynput.keyboard import Key, Listener
+from pynput import keyboard
 import keyboard
 import time
 import os
@@ -43,7 +44,12 @@ if file != None:
     keys = []
     for r in f:    
         if r != '\n':
-            keys = keys + [r.split()[0]].lower()
+            if "numpad" in r.lower().split()[0] and ((r.lower().split()[0]).replace("numpad", "")).isdigit():
+                for k in range(10):
+                    if int((r.lower().split()[0]).replace("numpad", "")) == k:
+                        keys+= [str(int((r.lower().split()[0]).replace("numpad", "")) + 96)]
+            else:
+                keys = keys + [r.lower().split()[0]]
     f.close()
 
     #gets messages
@@ -64,6 +70,8 @@ if file != None:
         global check
         if check == True:
             a = 0
+            if hasattr(key, 'vk') and isinstance(key.vk, int) and 96 <= key.vk <= 105:
+                key = key.vk
             key = str(key).lower()
             for x in keys:
                 if x == key:
