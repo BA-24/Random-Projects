@@ -62,36 +62,29 @@ if file != None:
         keyboard.write(message)
         keyboard.press_and_release('enter')
 
-    def calculate(string):
+    def calculate(string, calculate=True):
         string = list(string)
         arithmetics = ["+", "-", "*", "x", "^", "**", "/"] #supported arithmetics
         numberRequired = True
         for x in range(len(string)):
-            if string[x] in arithmetics:
-                if not numberRequired:
-                    if string[x] == "x":
-                        string[x] = "*"
-                        numberRequired = True
-                    elif string[x] == "*" and len(string) >= x+3 and string[x+1] == "*" and string[x+2] == "*" and (string[x] + string[x+1]) != "**":
-                        pass
-                    elif string[x] == "^":
-                        string[x] = "**"
-                        numberRequired = True
-                    else:
-                        numberRequired = True
-                elif numberRequired:
-                    string[x] = ""
-            elif string[x].isdigit():
-                numberRequired = False
-            else:
+            if string[x] == " ":
                 string[x] = ""
+            if string[x] == "x":
+                string[x] = "*"
+            if string[x] == "^":
+                string[x] = "**"
         string = "".join(string)
-        if string[-1:] in arithmetics:
-            if string[-2:] == "**":
-                string = string[:-2]
-            else:
-                string = string[:len(string)-1]
-        return eval(string)
+        if calculate:
+            try:
+                return eval(string)
+            except NameError:
+                return "invalid characters used: " + str(string)
+            except SyntaxError:
+                return "invalid syntax: " + str(string)
+            except Exception as e:
+                return "unknown error: " + str(e)
+        else:
+            return string
 
     def numberCheck(string):
         for x in list(string):
@@ -108,16 +101,18 @@ if file != None:
                     write(msg[a])
                 a = a + 1
             if str(key).lower() == "key.delete":
-                response = pymsgbox.prompt('enter equation')
+                response = pymsgbox.prompt('enter equation', "epic calculator")
                 if response and numberCheck(response):
                     if "," in list(response):
                         responseList = response.split(",")
-                        results = []
+                        results = [[], []]
                         for response in responseList:
-                            if numberCheck(response): results.append(str(calculate(response)))
-                        ctypes.windll.user32.MessageBoxW(0, "results:\n" + "\n".join(results), "epic calculator", 0x0)
+                            if numberCheck(response):
+                                results[0].append(str(calculate(response)))
+                                results[1].append(str(calculate(response, False)))
+                        ctypes.windll.user32.MessageBoxW(0, "calculated equations:\n" + "\n".join(results[1]) + "\nresults:\n" + "\n".join(results[0]), "epic calculator", 0x0)
                     else:        
-                        ctypes.windll.user32.MessageBoxW(0, "result: " + str(calculate(response)), "epic calculator", 0x0)
+                        ctypes.windll.user32.MessageBoxW(0, "calculated equation:\n" + str(calculate(response, False)) + "\nresult:\n" + str(calculate(response)), "epic calculator", 0x0)
 
     def on_release(key):
         global check
