@@ -13,4 +13,4 @@ You need the python pynput and keyboard modules to run this.
 
 (I recommend testing the hotkeys in an empty notepad to test how and if it works. Also, make sure you don't trigger the hotkey inside the hotkey)
 
-NEW: delete key now opens a calculator (if using the calculator version) that can supports addition (+), subtraction (-), multiplication(x or *), division (/), exponentiation (** or ^) and knows priority rules such as (2+1)*2=6.
+NEW: delete key now opens a calculator (if using the calculator version) that can supports addition (+), subtraction (-), multiplication(x or *), division (/), exponentiation (** or ^) and knows priority rules such as (2+1)*2=6. The calculator also has support for multiple calculations at a time, example; 2+2, 1+3 returns; 4, 4
